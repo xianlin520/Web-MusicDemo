@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XianLin|注册</title>
+    <link rel="shortcut icon" href="XianLinICO.ico" type="image/x-icon">
+    <style>
+        body {
+            background-image: url("https://api.ixiaowai.cn/mcapi/mcapi.php");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-width: 1800px;
+            /*height: 2000px;*/
+            position: relative;
+            /*display:flex;*/
+            justify-content: center;
+        }
+
+        .el-header, .el-footer {
+            /*background-color: #B3C0D1;*/
+            /*color: #333;*/
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .el-aside {
+            /*background-color: #D3DCE6;*/
+            /*color: #000000;*/
+
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .el-main {
+
+            background-color: rgba(255, 255, 255, 0.4);
+
+            position: relative;
+            /*position: fixed;*/
+            width: 60%;
+            height: 500px;
+            box-shadow: 0 5px 15px rgba(20, 20, 20, 0.8);
+            display: flex;
+            border-radius: 50px;
+            align-items: center;
+            top: 30%;
+            backdrop-filter: blur(50px);
+        }
+
+        body > .el-container {
+            margin-bottom: 40px;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 260px;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 320px;
+        }
+
+        /**/
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header></el-header>
+    </el-container>
+
+    <el-container>
+        <el-container>
+            <el-aside width="70%"></el-aside>
+            <el-main>
+                <el-header><h1>注册</h1></el-header>
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-row>
+                        <el-col :span="21">
+                            <div class="grid-content bg-purple-dark">
+                                <el-form label="QQ">
+                                    <!--                    <el-input v-model="form.QQ" placeholder="请输入内容"></el-input>-->
+                                    <el-form :model="form" ref="form" label-width="100px" class="demo-ruleForm">
+                                        <el-form-item
+                                                label="QQ"
+                                                prop="QQ"
+                                                :rules="[{ required: true, message: 'QQ不能为空'},{ type: 'number', message: 'QQ必须为数字值'}]">
+                                            <el-input type="QQ" v-model.number="form.QQ" autocomplete="off"
+                                                      placeholder="请输入QQ号" @blur="obtain"></el-input>
+                                        </el-form-item>
+                                    </el-form>
+                                </el-form>
+                                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                                         class="demo-ruleForm">
+                                    <el-form-item label="密码" prop="pass">
+                                        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"
+                                                  placeholder="请输入密码(并非QQ密码)"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="确认密码" prop="checkPass">
+                                        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"
+                                                  placeholder="请再次输入密码"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+                                        <div>
+                                            <el-header></el-header>
+                                            <el-link href="./login.html" type="success">已有账号?点我登录</el-link>
+                                        </div>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-form>
+            </el-main>
+        </el-container>
+        <el-aside width="15%"></el-aside>
+    </el-container>
+
+
+    <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :close-on-click-modal="false"
+    >
+        <span>
+            <el-col :span="21">
+                <div class="grid-content bg-purple-dark">
+                    <el-form label="name">
+                        <el-form :model="form" ref="form" label-width="100px" class="demo-ruleForm">
+                            <el-form-item
+                                    label="QQ:">
+                                {{form.QQ}}
+                            </el-form-item>
+                        </el-form>
+                        <!--                    <el-input v-model="form.QQ" placeholder="请输入内容"></el-input>-->
+                        <el-form :model="UserInfo" ref="UserInfo" label-width="100px" class="demo-ruleForm">
+                            <el-form-item
+                                    label="昵称"
+                                    prop="name"
+                                    :rules="[{ required: true, message: '昵称不能为空'}]">
+                                <el-input type="name" v-model.number="UserInfo.name" autocomplete="off"
+                                          placeholder="请输入昵称" ></el-input>
+                            </el-form-item>
+
+                        </el-form>
+                        <el-form :model="UserInfo" ref="UserInfo" label-width="100px" class="demo-ruleForm">
+                            <el-form-item
+                                    label="头像:">
+                                <div class="demo-basic--circle">
+                                    <div class="block"><el-avatar shape="square" :size="100" :src="UserInfo.imgurl"></el-avatar></div>
+                                </div>
+                            </el-form-item>
+                        </el-form>
+                    </el-form>
+                </div>
+
+            </el-col>
+        </span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="open">确 定</el-button>
+            <p/>
+            <el-alert
+                    title="昵称要求:常用汉字,大小写字母,数字,下划线;不能有特殊字符"
+                    type="warning"
+                    center
+                    :closable="false"
+                    show-icon>
+            </el-alert>
+  </span>
+    </el-dialog>
+
+
+</div>
+<!--引入框架-->
+<script src="js/vue.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="element-ui/lib/index.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        mounted() {
+            // this.open();
+        },
+        methods: {
+            obtain() {
+                var _this = this;
+                axios.get('http://ovooa.com/API/qqxx/?QQ=' + this.form.QQ).then(function (response) {
+                    console.log(response);
+                    if (response.data.code == 1) {
+                        // _this.$message.success("获取成功"+'    '+"昵称:"+response.data.data.name);
+                        _this.UserInfo.name = response.data.data.name;
+                        _this.UserInfo.imgurl = response.data.data.imgurl;
+                    } else {
+                        _this.$message.error("此QQ号不存在");
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            // 定义一个方法, 返回布尔值
+            checkByUserInfo() {
+                var _this = this;
+                // 检查UserInfo.name是否匹配中文,英文,数字,下划线,点,减号,空格,逗号
+                var reg = /^[\u4e00-\u9fa5_a-zA-Z0-9\.,\-\s]+$/;
+                // 检查UserInfo.name是否匹配正则表达式red
+                if (reg.test(_this.UserInfo.name)) {
+
+                    // _this.$message.error("昵称不能包含特殊字符");
+                    // return false;
+                    _this.checkUserName=true;
+                } else {
+                    // return true;
+                    _this.checkUserName=false;
+                }
+            },
+            submitForm(formName) {
+                var _this = this;
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        // _this.obtain();
+                        _this.check();
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            check: function () {
+                _this = this;
+                axios.get('/enroll?userQQ=' + this.form.QQ).then(function (response) {
+                    console.log(response);
+                    if (response.data == 200) {
+                        _this.$message.error({
+                            message: '此账号已被注册, 可直接登录; 如果忘记密码, 请联系管理员找回密码',
+                            duration: 5000,
+                            showClose: true,
+                        });
+                        /*this.$notify({
+                            title: '此QQ不可用',
+                            message: '此账号已被注册, 可直接登录; 如果忘记密码, 请联系管理员找回密码, 谢谢',
+                            type: 'warning'
+                        });*/
+                    } else {
+                        // alert('open');
+                        // _this.open();
+                        _this.dialogVisible = true;
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            open() {
+                // this.dialogVisible = true;
+                _this = this;
+                this.checkByUserInfo();
+                const loading = this.$loading({
+                    lock: true,
+                    text: '注册中...',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                setTimeout(() => {
+                    loading.close();
+                }, 500);
+                if (_this.checkUserName) {
+                    setTimeout(() => {
+                        axios.get('/enroll?userQQ='+this.form.QQ+"&userPassword="+this.ruleForm.checkPass+"&userName="+this.UserInfo.name);
+                        this.$message({
+                            type: 'success',
+                            message: '注册成功'
+                        });
+                        this.dialogVisible = false;
+                    }, 800);
+                }else {
+                    setTimeout(() => {
+                        this.$message.error('昵称不能包含特殊字符');
+                    }, 800);
+                }
+            }
+        },
+
+
+        data() {
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.ruleForm.checkPass !== '') {
+                        this.$refs.ruleForm.validateField('checkPass');
+                    }
+                    callback();
+                }
+            };
+            var validatePass2 = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.ruleForm.pass) {
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                dialogVisible: false,
+                checkUserName: false,
+                UserInfo: {
+                    imgurl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+                    name: '佚名',
+                },
+                form: {
+                    QQ: '',
+                    password: '',
+                },
+                /*formCheck: {
+                    userName: '',
+                },*/
+                ruleForm: {
+                    pass: '',
+                    checkPass: '',
+                },
+                rules: {
+                    pass: [
+                        {validator: validatePass, trigger: 'blur'}
+                    ],
+                    checkPass: [
+                        {validator: validatePass2, trigger: 'blur'}
+                    ],
+
+                }
+            };
+        }
+    })
+</script>
+</body>
+</html>
