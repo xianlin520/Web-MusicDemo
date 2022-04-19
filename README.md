@@ -1,19 +1,20 @@
 # 网站开发日志([XianLin.xyz](https://www.xianlin.xyz))
 
 > 2022年4月15日项目启动 -- 网站上线日期: 未定
-
-## 开发环境
-
-> 前端语言框架: [Vue](https://cn.vuejs.org/) 页面元素框架: [Element-UI](https://element.eleme.cn/)
-> 后端语言: [Java](https://www.java.com/)  - JDK17
->> 框架: [Axios](https://www.npmjs.com/package/axios), [Mybatis](https://www.npmjs.com/package/mybatis-plus)
-> > 数据库: [MySQL](https://www.mysql.com/)
-> 部署环境: [Tomcat](https://www.apache.org/tomcat/), [腾讯云](https://cloud.tencent.com/)
+>### 开发环境
+> - 前端框架: [Vue](https://cn.vuejs.org/) 页面元素框架: [Element-UI](https://element.eleme.cn/)
+> - 后端语言: [Java](https://www.java.com/)  - JDK1.8
+    > |框架: [Axios](https://www.npmjs.com/package/axios), [Mybatis](https://www.npmjs.com/package/mybatis-plus)
+    > 数据库: [MySQL](https://www.mysql.com/)
+    > 部署环境: [Tomcat](https://www.apache.org/tomcat/), [腾讯云](https://cloud.tencent.com/)
+> - 代码托管: [GitHub](https://github.com/xianlin520/Web-MusicDemo/) And [Gitee](https://gitee.com/xianlin-i/web-music-demo)
 ---
+
+
 > ### 2022年4月19日
 >> 网站源码资源同步到GitHub和Gitee
-> - [GitHub](https://github.com/xianlin520/Web-MusicDemo/)
-> - [Gitee](https://gitee.com/xianlin-i/web-music-demo)
+>> - [GitHub](https://github.com/xianlin520/Web-MusicDemo/)
+>> - [Gitee](https://gitee.com/xianlin-i/web-music-demo)
 
 > ### 2022年4月17日-18日
 > - 前端enroll注册页面上线
