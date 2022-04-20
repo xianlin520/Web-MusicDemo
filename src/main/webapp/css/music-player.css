@@ -1,0 +1,108 @@
+body {
+    background-image: url("https://api.ixiaowai.cn/gqapi/gqapi.php");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-width: 1800px;
+    /*height: 2000px;*/
+    position: relative;
+    /*display:flex;*/
+    justify-content: center;
+}
+
+.el-header {
+    background-color: rgba(255, 192, 203, 1);
+    /*background-color: #B3C0D1;*/
+    /*background-color: #FBB9DF;*/
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+
+}
+
+.el-aside {
+    background-color: rgba(255, 255, 255, 1);
+    /*background-color: #D3DCE6;*/
+    color: #333;
+    text-align: left;
+    height: 500px;
+    /*line-height: 200px;*/
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 500px;
+}
+
+.el-footer {
+    background-color: #F1F3F4;
+    /*color: #333;*/
+    text-align: center;
+    line-height: 60px;
+}
+
+
+body > .el-container {
+    margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+}
+
+
+.el-row {
+    margin-bottom: 20px;
+}
+
+.last-child {
+    margin-bottom: 0;
+}
+
+.el-col {
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    height: 200px;
+    /*background: #99a9bf;*/
+}
+
+.bg-purple {
+    /*background: #d3dce6;*/
+}
+
+.bg-purple-light {
+    /*background: #e5e9f2;*/
+    background-color: rgba(255, 255, 255, 0.4);
+    /*border-radius: 30px;*/
+    /*position: relative;*/
+    /*position: fixed;*/
+    /*width: 60%;*/
+    /*height: 500px;*/
+    box-shadow: 0 5px 15px rgba(20, 20, 20, 0.8);
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    top: 30%;
+    backdrop-filter: blur(45px);
+
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}

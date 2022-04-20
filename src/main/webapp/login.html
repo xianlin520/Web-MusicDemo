@@ -3,72 +3,19 @@
     <meta charset="UTF-8">
     <title>XianLin|登录</title>
     <link rel="shortcut icon" href="XianLinICO.ico" type="image/x-icon">
-    <style>
-        body {
-            background-image: url("https://api.ixiaowai.cn/gqapi/gqapi.php");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-width: 1800px;
-            /*height: 2000px;*/
-            position: relative;
-            /*display:flex;*/
-            justify-content: center;
-        }
+    <!--引入CSS-->
+    <link href="css/login.css" rel="stylesheet">
 
-        .el-header, .el-footer {
-            /*background-color: #B3C0D1;*/
-            /*color: #333;*/
-            text-align: center;
-            line-height: 50px;
-        }
-
-        .el-aside {
-            /*background-color: #D3DCE6;*/
-            /*color: #000000;*/
-
-            text-align: center;
-            line-height: 200px;
-        }
-
-        .el-main {
-
-            background-color: rgba(255, 255, 255, 0.4);
-
-            position: relative;
-            /*position: fixed;*/
-            width: 60%;
-            height: 500px;
-            box-shadow: 0 5px 15px rgba(20, 20, 20, 0.8);
-            display: flex;
-            border-radius: 50px;
-            align-items: center;
-            top: 30%;
-            backdrop-filter: blur(50px);
-        }
-
-        body > .el-container {
-            margin-bottom: 40px;
-        }
-
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 260px;
-        }
-
-        .el-container:nth-child(7) .el-aside {
-            line-height: 320px;
-        }
-        /**/
-
-    </style>
+    <script src="js/vue.js"></script>
+    <link href="element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+    <script src="element-ui/lib/index.js"></script>
+    <script src="js/axios.min.js"></script>
 </head>
 <body>
 <div id="app">
     <el-container>
         <el-header></el-header>
     </el-container>
-
     <el-container>
         <el-container>
             <el-aside width="70%"></el-aside>
@@ -128,67 +75,8 @@
         <el-aside width="15%"></el-aside>
     </el-container>
 
-
+    <!--引入Vue对象-->
+    <script src="js/login.js"></script>
 </div>
-<!-- 引入样式 -->
-<script src="js/vue.js"></script>
-<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
-<script src="element-ui/lib/index.js"></script>
-<script src="js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        mounted() {
-
-        },
-        methods: {
-            obtain() {
-                _this = this;
-                axios.get('http://ovooa.com/API/qqxx/?QQ=' + this.form.QQ).then(function (response) {
-                    console.log(response);
-                    if (response.data.code == 1) {
-                        _this.$message.success("获取成功");
-                        _this.UserInfo.name = response.data.data.name;
-                        _this.UserInfo.imgurl = response.data.data.imgurl;
-                    } else {
-                        _this.$message.error("账号不存在");
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },
-            onSubmit() {
-                _this = this;
-                axios({
-                    method: "post",
-                    url: "/login?userQQ="+this.form.QQ+"&userPassword="+this.form.password,
-                    data: this.form
-                }).then(function (response) {
-                    if (response.data == 200) {
-                        // alert("登录成功");
-                        _this.$message.success("登录成功");
-                    } else {
-                        _this.$message.error("登录失败");
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-            });
-            },
-        },
-        data() {
-            return {
-                UserInfo: {
-                    imgurl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
-                    name: 'Test',
-                },
-                form: {
-                    QQ: '',
-                    password: '',
-                    type: false
-                }
-            }
-        }
-    })
-</script>
 </body>
 </html>

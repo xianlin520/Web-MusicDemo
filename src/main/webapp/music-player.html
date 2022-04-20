@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>歌曲搜索</title>
+    <link href="XianLinICO.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="css/music-player.css" rel="stylesheet">
+</head>
+<!--<body>-->
+<body>
+<!--<body background="https://api.ixiaowai.cn/mcapi/mcapi.php">-->
+
+<div id="app">
+    <el-col :span="24">
+        <div class="grid-content bg-purple-dark"></div>
+    </el-col>
+    <el-row>
+        <el-col :span="5">
+            <div class="grid-content bg-purple"></div>
+        </el-col>
+
+        <el-col :span="14">
+            <div class="grid-content bg-purple-light">
+                <el-container>
+                    <!--音乐搜索框, 上部头部区域-->
+                    <el-header>
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark">
+                                <el-col :span="12">
+                                    <div class="grid-content bg-purple-dark">
+                                    </div>
+                                </el-col>
+                                <!--数据输入框, 音乐名-->
+                                <el-col :span="10">
+                                    <div class="grid-content bg-purple-dark">
+                                        <el-input placeholder="请输入内容" v-model="InputName"></el-input>
+                                    </div>
+                                </el-col>
+                                <!--搜索按钮-->
+                                <el-col :span="2">
+                                    <div class="grid-content bg-purple-dark">
+                                        <el-button @click="SearchSong" circle icon="el-icon-search"></el-button>
+                                    </div>
+                                </el-col>
+                            </div>
+                        </el-col>
+                    </el-header>
+                    <el-container>
+                        <!--歌曲选择列表-->
+                        <el-aside width="350px">
+                            <lu>
+                                <li :key="SongId" @click="player(SongId)" style="list-style:none;"
+                                    v-for="(item, SongId) in SongsList">
+                                    <el-button circle icon="el-icon-video-play" type="text"></el-button>
+                                    <span>{{item.split("—")[0]}}</span>
+                                </li>
+                            </lu>
+                        </el-aside>
+
+                        <el-main>
+
+                        </el-main>
+                    </el-container>
+                    <el-footer>
+                        <audio :src="SongData.Url" autoplay="autoplay" class="SongPlayer" controls="controls"
+                               style="width: 100%; height: 100%;"></audio>
+                    </el-footer>
+                </el-container>
+            </div>
+        </el-col>
+
+        <el-col :span="5">
+            <div class="grid-content bg-purple"></div>
+        </el-col>
+    </el-row>
+
+
+</div>
+<script src="js/vue.js"></script>
+<!-- 引入样式 -->
+<link href="element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+<!-- 引入组件库 -->
+<script src="element-ui/lib/index.js"></script>
+<!--引入axios文件-->
+<script src="js/axios.min.js"></script>
+<script src="js/music-player.js"></script>
+</body>
+</html>
