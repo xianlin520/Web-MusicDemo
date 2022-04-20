@@ -33,7 +33,7 @@
                                 <!--数据输入框, 音乐名-->
                                 <el-col :span="10">
                                     <div class="grid-content bg-purple-dark">
-                                        <el-input placeholder="请输入内容" v-model="InputName"></el-input>
+                                        <el-input placeholder="请输入歌名或歌手" v-model="InputName"></el-input>
                                     </div>
                                 </el-col>
                                 <!--搜索按钮-->
@@ -46,19 +46,56 @@
                         </el-col>
                     </el-header>
                     <el-container>
-                        <!--歌曲选择列表-->
+                        <!--歌曲展示区域-->
                         <el-aside width="350px">
-                            <lu>
-                                <li :key="SongId" @click="player(SongId)" style="list-style:none;"
-                                    v-for="(item, SongId) in SongsList">
-                                    <el-button circle icon="el-icon-video-play" type="text"></el-button>
-                                    <span>{{item.split("—")[0]}}</span>
-                                </li>
-                            </lu>
+                            <el-row>
+                                <el-col :span="24">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <img :src=SongData.Cover class="image">
+                                        <div style="padding: 20px;">
+                                            <span>{{SongData.Music}}</span>
+                                            <div class="bottom clearfix">
+                                                <time class="time">{{ SongData.Singer }}</time>
+                                                <!--                                                <el-button type="text" class="button">网易云链接</el-button>-->
+                                                <el-link :href="SongData.Music_Url" class="button" type="success">
+                                                    网易云链接
+                                                </el-link>
+                                            </div>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                            </el-row>
+                            - - {{showText}} - -
                         </el-aside>
-
+                        <!--歌曲选择列表-->
                         <el-main>
-
+                            <template>
+                                <el-table
+                                        :data="SongDataList"
+                                        style="width: 100%">
+                                    <el-table-column
+                                            label="歌名"
+                                            prop="song"
+                                            width="280">
+                                    </el-table-column>
+                                    <el-table-column
+                                            label="歌手"
+                                            prop="singers"
+                                            width="180">
+                                    </el-table-column>
+                                    <el-table-column
+                                            align="right">
+                                        <template slot-scope="scope">
+                                            <el-button
+                                                    @click="player(scope.$index)"
+                                                    icon="el-icon-video-play"
+                                                    size="mini"
+                                                    type="primary">播放
+                                            </el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </template>
                         </el-main>
                     </el-container>
                     <el-footer>

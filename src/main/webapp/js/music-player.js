@@ -2,6 +2,7 @@ new Vue({
     el: "#app",
     mounted() {
         this.getVideo();
+        this.obtainText();
     },
     methods: {
         getVideo() {
@@ -9,11 +10,15 @@ new Vue({
         },
         SearchSong() {
             var _this = this;
-            axios.get("http://ovooa.com/API/wydg/api.php?sc=50&msg=" + this.InputName)
+            axios.get("http://ovooa.com/API/wydg/api.php?sc=10&msg=" + this.InputName)
                 .then(response => {
-                    this.Songs = response.data.Msg;
-                    // console.log(this.Songs);
-                    _this.SongsList = this.Songs;
+                    var Songs = response.data.data;
+                    // console.log(Songs);
+                    _this.SongDataList = Songs;
+                    this.$message({
+                        message: '搜索成功',
+                        type: 'success'
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -24,11 +29,12 @@ new Vue({
             // console.log(song);
             // var song_id = song/10;
             // song除10保留1位小数
-            var song_id = (song / 10).toFixed(1);
-            p = parseInt(song_id.split(".")[0]);
-            n = parseInt(song_id.split(".")[1]);
+            // var song_id = (song / 10).toFixed(1);
+            // p = parseInt(song_id.split(".")[0]);
+            // n = parseInt(song_id.split(".")[1]);
             // console.log(song_id.split("."));
-            axios.get("http://ovooa.com/API/wydg/api.php?sc=51&msg=" + this.InputName + "&p=" + (p + 1) + "&n=" + (n + 1))
+            // axios.get("http://ovooa.com/API/wydg/api.php?sc=51&msg=" + this.InputName + "&p=" + (p + 1) + "&n=" + (n + 1))
+            axios.get("http://ovooa.com/API/wydg/api.php?sc=51&msg=" + this.InputName + "&n=" + (song + 1))
                 .then(response => {
                     // console.log(response.data);
                     _this.SongData = response.data.data;
@@ -37,22 +43,21 @@ new Vue({
                     console.log(error);
                 });
         },
+        obtainText() {
+            var _this = this;
+            axios.get("http://ovooa.com/API/wryl/api.php")
+                .then(response => {
+                    // console.log(response.data);
+                    _this.showText = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     },
     data() {
         return {
-            InputName: "许嵩",
-            SongsList: [
-                "清明雨上—许嵩",
-                "有何不可—许嵩",
-                "素颜—许嵩,何曼婷",
-                "玫瑰花的葬礼—许嵩",
-                "雅俗共赏—许嵩",
-                "多余的解释—许嵩",
-                "庐州月—许嵩",
-                "幻听—许嵩",
-                "断桥残雪—许嵩",
-                "天龙八部之宿敌—许嵩"
-            ],
+            InputName: "",
             SongData: {
                 "Id": 167882,
                 "Music": "清明雨上",
@@ -63,7 +68,18 @@ new Vue({
                 "Singer": "许嵩",
                 "Url": "http://music.163.com/song/media/outer/url?id=167882",
                 "Music_Url": "https://music.163.com/#/song?id=167882"
-            }
+            },
+            SongDataList: [{
+                "song": "清明雨上",
+                "singer": ["许嵩"],
+                "singers": "许嵩"
+            },
+                {
+                    "song": "有何不可",
+                    "singer": ["许嵩"],
+                    "singers": "许嵩"
+                }],
+            showText: "",
         }
     }
 });

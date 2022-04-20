@@ -8,7 +8,9 @@ body {
     position: relative;
     /*display:flex;*/
     justify-content: center;
+    /*margin: 0;*/
 }
+
 
 .el-header {
     background-color: rgba(255, 192, 203, 1);
@@ -32,8 +34,8 @@ body {
 .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 500px;
+    text-align: left;
+    height: 500px;
 }
 
 .el-footer {
@@ -105,4 +107,35 @@ body > .el-container {
 .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
+}
+
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
 }
