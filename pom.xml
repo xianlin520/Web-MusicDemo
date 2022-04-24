@@ -68,6 +68,8 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!--导入SpringMVC-->
+
     </dependencies>
     <build>
         <plugins>

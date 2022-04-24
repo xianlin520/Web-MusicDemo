@@ -5,7 +5,21 @@
     <title>注册</title>
 </head>
 <body>
-<!--添加图片-->
-<th><img src=" XianLinICO.ico  "></th>
 </body>
+<script>
+    let data = ["1", "6", "8"];
+    let dataEntries = data.entries();
+    /*for (let datum of dataEntries) {
+        console.log(datum);
+    }
+    for (let datum of data) {
+        console.log(datum);
+
+    }*/
+    data.forEach(function (value, index, array) {
+        console.log(value);
+        console.log(index);
+        console.log(array);
+    });
+</script>
 </html>

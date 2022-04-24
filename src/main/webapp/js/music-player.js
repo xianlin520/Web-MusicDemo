@@ -34,7 +34,7 @@ new Vue({
             // n = parseInt(song_id.split(".")[1]);
             // console.log(song_id.split("."));
             // axios.get("http://ovooa.com/API/wydg/api.php?sc=51&msg=" + this.InputName + "&p=" + (p + 1) + "&n=" + (n + 1))
-            axios.get("http://ovooa.com/API/wydg/api.php?sc=51&msg=" + this.InputName + "&n=" + (song + 1))
+            axios.get("http://ovooa.com/API/wydg/api.php?msg=" + this.InputName + "&n=" + (song + 1))
                 .then(response => {
                     // console.log(response.data);
                     _this.SongData = response.data.data;
