@@ -4,13 +4,22 @@
 >### 开发环境
 > - 前端框架: [Vue](https://cn.vuejs.org/) 页面元素框架: [Element-UI](https://element.eleme.cn/)
 > - 后端语言: [Java](https://www.java.com/)  - JDK1.8
-    | 框架: [Axios](https://www.npmjs.com/package/axios), [Mybatis](https://www.npmjs.com/package/mybatis-plus)
+    | 框架: [Spring](https://www.spring.io/) |
+    [SpringMVC](https://www.spring.io/projects/spring-framework/) |
+    [Mybatis](https://www.mybatis.org/)
     | 数据库: [MySQL](https://www.mysql.com/)
     | 部署环境: [Tomcat](https://www.apache.org/tomcat/), [腾讯云](https://cloud.tencent.com/)
 > - 代码托管: [GitHub](https://github.com/xianlin520/Web-MusicDemo/) And [Gitee](https://gitee.com/xianlin-i/web-music-demo)
 ---
 
-
+> ### 2022年4月25日 - 更新后端框架
+> - 原后端框架: Servlet, Mybatis
+> - 更新后端框架: [Spring](https://www.spring.io/) |
+    [SpringMVC](https://www.spring.io/projects/spring-framework/) |
+    [Mybatis](https://www.mybatis.org/)
+> - 代码托管: [GitHub](https://github.com/xianlin520/Web-MusicDemo/) And [Gitee](https://gitee.com/xianlin-i/web-music-demo)
+> - 后端逻辑更换为SSM框架, 前端页面与后端通过Ajax交互逻辑完成
+> - 暂无其他内容更新, 计划上线个人信息页面
 
 > ### 2022年4月21日-前端music-player音乐搜索页面上线
 >- 纯第三方接口: [一句话](http://ovooa.com/?action=doc&id=2) And [歌曲搜索](http://ovooa.com/?action=doc&id=9)

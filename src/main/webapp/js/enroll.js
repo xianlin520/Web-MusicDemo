@@ -6,12 +6,12 @@ new Vue({
     methods: {
         obtain() {
             var _this = this;
-            axios.get('http://ovooa.com/API/qqxx/?QQ=' + this.form.QQ).then(function (response) {
+            axios.get('http://ovooa.com/API/qqxx/?QQ=' + this.userForm.userQQ).then(function (response) {
                 console.log(response);
                 if (response.data.code == 1) {
                     // _this.$message.success("获取成功"+'    '+"昵称:"+response.data.data.name);
-                    _this.UserInfo.name = response.data.data.name;
-                    _this.UserInfo.imgurl = response.data.data.imgurl;
+                    _this.userForm.userName = response.data.data.name;
+                    _this.userForm.imgUrl = response.data.data.imgurl;
                 } else {
                     _this.$message.error("此QQ号不存在");
                 }
@@ -25,7 +25,7 @@ new Vue({
             // 检查UserInfo.name是否匹配中文,英文,数字,下划线,点,减号,空格,逗号
             var reg = /^[\u4e00-\u9fa5_a-zA-Z0-9\.,\-\s]+$/;
             // 检查UserInfo.name是否匹配正则表达式red
-            if (reg.test(_this.UserInfo.name)) {
+            if (reg.test(_this.userForm.userName)) {
 
                 // _this.$message.error("昵称不能包含特殊字符");
                 // return false;
@@ -49,9 +49,9 @@ new Vue({
         },
         check: function () {
             _this = this;
-            axios.get('/enroll?userQQ=' + this.form.QQ).then(function (response) {
+            axios.get('/users/' + this.userForm.userQQ).then(function (response) {
                 console.log(response);
-                if (response.data == 200) {
+                if (response.data.code == 30011) {
                     _this.$message.error({
                         message: '此账号已被注册, 可直接登录; 如果忘记密码, 请联系管理员找回密码',
                         duration: 5000,
@@ -74,6 +74,7 @@ new Vue({
         open() {
             // this.dialogVisible = true;
             _this = this;
+            this.userForm.userPassword = this.ruleForm.checkPass;
             this.checkByUserInfo();
             const loading = this.$loading({
                 lock: true,
@@ -86,12 +87,19 @@ new Vue({
             }, 500);
             if (_this.checkUserName) {
                 setTimeout(() => {
-                    axios.get('/enroll?userQQ=' + this.form.QQ + "&userPassword=" + this.ruleForm.checkPass + "&userName=" + this.UserInfo.name);
-                    this.$message({
-                        type: 'success',
-                        message: '注册成功'
-                    });
-                    this.dialogVisible = false;
+                    axios.put('/users', this.userForm).then(function (response) {
+                        console.log(response);
+                        if (response.data.code == 40071) {
+                            _this.$message({
+                                type: 'success',
+                                message: '注册成功'
+                            });
+                        } else {
+                            _this.$message.error("注册失败");
+                        }
+
+                        this.dialogVisible = false;
+                    })
                 }, 800);
             } else {
                 setTimeout(() => {
@@ -125,13 +133,11 @@ new Vue({
         return {
             dialogVisible: false,
             checkUserName: false,
-            UserInfo: {
-                imgurl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
-                name: '佚名',
-            },
-            form: {
-                QQ: '',
-                password: '',
+            userForm: {
+                userQQ: '',
+                userName: '佚名',
+                userPassword: '',
+                imgUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
             },
             /*formCheck: {
                 userName: '',
