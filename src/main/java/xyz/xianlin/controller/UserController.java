@@ -22,7 +22,7 @@ public class UserController {
     @PostMapping // 指定请求方式为POST, 用于查询用户密码是否正确
     public Result selectByUserQQAndUserPassword(@RequestBody UserData userData) {
         UserData userDataRet = userService.selectByUserQQAndUserPassword(userData);
-        return new Result(userData != null ? Code.POST_OK : Code.POST_ERR, userDataRet);
+        return new Result(userDataRet != null ? Code.POST_OK : Code.POST_ERR, userDataRet);
     }
     
     @PutMapping // 指定请求方式为PUT, 用于插入新用户
